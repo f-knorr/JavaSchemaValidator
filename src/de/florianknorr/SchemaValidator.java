@@ -13,6 +13,11 @@ import javax.xml.validation.Validator;
 
 import org.xml.sax.SAXException;
 
+
+/**
+ * This class is inspired by and modified from
+ * http://marxsoftware.blogspot.com/2015/03/validating-xml-against-xsd-in-java.html
+ */
 public class SchemaValidator {
 
   /** 
@@ -35,7 +40,7 @@ public class SchemaValidator {
      // Arrays.copyOfRange requires JDK 6; see  
      // http://stackoverflow.com/questions/7970486/porting-arrays-copyofrange-from-java-6-to-java-5  
      // for additional details for versions of Java prior to JDK 6.  
-     String[] schemas = {""};
+     String[] schemas;
      if (arguments.length == 1) {
     	 File folder = new File("xsd");
        System.err.println("Kein Ordnerpfad für XSD-Datei(en) angegeben.\n"
@@ -54,8 +59,10 @@ public class SchemaValidator {
    File[] listOfFiles = folder.listFiles();
    String[] schemaArray = new String[listOfFiles.length];
  	 for (int idx = 0; idx < listOfFiles.length; idx++) {
- 	   schemaArray[idx] = listOfFiles[idx].getAbsolutePath();
-     System.out.println("Benutze schema: "+schemaArray[idx]);
+ 	   if (listOfFiles[idx].getName().toLowerCase().endsWith(".xsd")) {
+ 	  	schemaArray[idx] = listOfFiles[idx].getAbsolutePath();
+      System.out.println("Benutze Schema: "+schemaArray[idx]); 
+ 	   }
  	 }
  	 return schemaArray;
   }
