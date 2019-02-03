@@ -91,6 +91,7 @@ public class SchemaValidator {
     
      final StreamSource[] xsdSources = generateStreamSourcesFromXsdPathsJdk8(xsdFilesPathsAndNames);  
     
+     boolean success = true;
      try  
      {  
         final Schema schema = schemaFactory.newSchema(xsdSources);  
@@ -101,12 +102,15 @@ public class SchemaValidator {
      }  
      catch (IOException | SAXException exception)  // JDK 7 multi-exception catch  
      {  
+    	  success = false;
         System.err.println(  
              "ERROR: Konnte die Date " + xmlFilePathAndName  
            + " nicht validieren gegen XSDs " + Arrays.toString(xsdFilesPathsAndNames));  
-        System.err.println("\n\nFEHLER: " + exception);  
+        System.err.println("\n\nERROR: " + exception.toString().replace(";", ";\n"));  
+     }
+     if (success) {
+    	 System.out.println("Validierung erfolgreich abgeschlossen."); 
      }  
-     System.out.println("Validierung abgeschlossen.");  
   }
 
 
