@@ -21,7 +21,7 @@ import javax.swing.UIManager;
  *   images/Open16.gif
  *   images/Save16.gif
  */
-public class JFileChooserDialogue extends JPanel
+public class SchemaValidatorGUI extends JPanel
                              implements ActionListener {
     static private final String newline = "\n";
     JButton openButton, saveButton;
@@ -30,7 +30,7 @@ public class JFileChooserDialogue extends JPanel
     SchemaValidator sv = new SchemaValidator();
     String arguments[] = {"", ""};
  
-    public JFileChooserDialogue() {
+    public SchemaValidatorGUI() {
         super(new BorderLayout());
  
         //Create the log first, because the action listeners
@@ -79,7 +79,7 @@ public class JFileChooserDialogue extends JPanel
  
         //Handle open button action.
         if (e.getSource() == openButton) {
-            int returnVal = fc.showOpenDialog(JFileChooserDialogue.this);
+            int returnVal = fc.showOpenDialog(SchemaValidatorGUI.this);
  
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File file = fc.getSelectedFile();
@@ -96,7 +96,7 @@ public class JFileChooserDialogue extends JPanel
  
         //Handle save button action.
         } else if (e.getSource() == saveButton) {
-            int returnVal = folderChooser.showOpenDialog(JFileChooserDialogue.this);
+            int returnVal = folderChooser.showOpenDialog(SchemaValidatorGUI.this);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File file = folderChooser.getSelectedFile();
                 //This is where a real application would save the file.
@@ -114,7 +114,7 @@ public class JFileChooserDialogue extends JPanel
  
     /** Returns an ImageIcon, or null if the path was invalid. */
     protected static ImageIcon createImageIcon(String path) {
-        java.net.URL imgURL = JFileChooserDialogue.class.getResource(path);
+        java.net.URL imgURL = SchemaValidatorGUI.class.getResource(path);
         if (imgURL != null) {
             return new ImageIcon(imgURL);
         } else {
@@ -134,7 +134,7 @@ public class JFileChooserDialogue extends JPanel
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
  
         //Add content to the window.
-        frame.add(new JFileChooserDialogue());
+        frame.add(new SchemaValidatorGUI());
  
         //Display the window.
         frame.pack();
