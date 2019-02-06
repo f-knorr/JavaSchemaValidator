@@ -2,7 +2,9 @@ package de.florianknorr;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.xml.XMLConstants;
@@ -62,14 +64,14 @@ public class SchemaValidator {
   
   private String[] fillSchemaArray(File folder) {
    File[] listOfFiles = folder.listFiles();
-   String[] schemaArray = new String[listOfFiles.length];
+   List<String> files = new ArrayList<String>();
  	 for (int idx = 0; idx < listOfFiles.length; idx++) {
  	   if (listOfFiles[idx].getName().toLowerCase().endsWith(".xsd")) {
- 	  	schemaArray[idx] = listOfFiles[idx].getAbsolutePath();
-      System.out.println("Benutze Schema: "+schemaArray[idx]); 
+ 	  	files.add(listOfFiles[idx].getAbsolutePath());
+      System.out.println("Benutze Schema: "+listOfFiles[idx].getAbsolutePath()); 
  	   }
  	 }
- 	 return schemaArray;
+ 	 return files.toArray(new String[0]);
   }
   /** 
    * Validate provided XML against the provided XSD schema files. 
