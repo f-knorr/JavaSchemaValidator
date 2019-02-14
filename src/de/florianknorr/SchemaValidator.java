@@ -49,15 +49,15 @@ public class SchemaValidator {
     // for additional details for versions of Java prior to JDK 6.  
     String[] schemas;
     if (arguments.length == 1) {
-   	 File folder = new File("xsd");
+        File folder = new File("xsd");
       System.err.println("Kein Ordnerpfad für XSD-Datei(en) angegeben.\n"
-      		+ "Versuche: "+folder.getAbsolutePath());
+              + "Versuche: "+folder.getAbsolutePath());
       schemas = fillSchemaArray(folder);
     } else if (arguments.length > 2) {
       schemas = Arrays.copyOfRange(arguments, 1, arguments.length);  
     } else {
-   	 File folder = new File(arguments[1]);
-   	 schemas = fillSchemaArray(folder);   	 
+        File folder = new File(arguments[1]);
+        schemas = fillSchemaArray(folder);        
     }
     return validateXmlAgainstXsds(arguments[0], schemas);  
   }
@@ -65,13 +65,13 @@ public class SchemaValidator {
   private String[] fillSchemaArray(File folder) {
    File[] listOfFiles = folder.listFiles();
    List<String> files = new ArrayList<String>();
- 	 for (int idx = 0; idx < listOfFiles.length; idx++) {
- 	   if (listOfFiles[idx].getName().toLowerCase().endsWith(".xsd")) {
- 	  	files.add(listOfFiles[idx].getAbsolutePath());
+      for (int idx = 0; idx < listOfFiles.length; idx++) {
+        if (listOfFiles[idx].getName().toLowerCase().endsWith(".xsd")) {
+           files.add(listOfFiles[idx].getAbsolutePath());
       System.out.println("Benutze Schema: "+listOfFiles[idx].getAbsolutePath()); 
- 	   }
- 	 }
- 	 return files.toArray(new String[0]);
+        }
+      }
+      return files.toArray(new String[0]);
   }
   /** 
    * Validate provided XML against the provided XSD schema files. 
@@ -110,7 +110,7 @@ public class SchemaValidator {
      }  
      catch (IOException | SAXException exception)  // JDK 7 multi-exception catch  
      {  
-    	  success = false;
+          success = false;
         System.err.println(  
              "ERROR: Konnte die Date " + xmlFilePathAndName  
            + " nicht validieren gegen XSDs " + Arrays.toString(xsdFilesPathsAndNames));  
@@ -118,8 +118,8 @@ public class SchemaValidator {
         result = exception.toString().replace(";", ";\n");
      }
      if (success) {
-    	 System.out.println("Validierung erfolgreich abgeschlossen.");
-    	 result ="Validierung erfolgreich abgeschlossen.";
+         System.out.println("Validierung erfolgreich abgeschlossen.");
+         result ="Validierung erfolgreich abgeschlossen.";
      }  
      return result;
   }

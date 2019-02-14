@@ -23,12 +23,14 @@ import javax.swing.UIManager;
  */
 public class SchemaValidatorGUI extends JPanel
                              implements ActionListener {
-    static private final String newline = "\n";
+  private static final long serialVersionUID = -8360503524562999143L;
+    
+    private static final String NEWLINE = "\n";
     JButton openButton, saveButton;
     JTextArea log;
     JFileChooser fc, folderChooser;
-    SchemaValidator sv = new SchemaValidator();
-    String arguments[] = {"", ""};
+    private SchemaValidator sv = new SchemaValidator();
+    private String arguments[] = {"", ""};
  
     public SchemaValidatorGUI() {
         super(new BorderLayout());
@@ -57,7 +59,7 @@ public class SchemaValidatorGUI extends JPanel
  
         //Create the open button.  We use the image from the JLF
         //Graphics Repository (but we extracted it from the jar).
-        openButton = new JButton("xml-File to check");
+        openButton = new JButton("xml-File to validate");
         openButton.addActionListener(this);
  
         //Create the save button.  We use the image from the JLF
@@ -84,13 +86,13 @@ public class SchemaValidatorGUI extends JPanel
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File file = fc.getSelectedFile();
                 //This is where a real application would open the file.
-                log.append("File: " + file.getAbsolutePath() + "." + newline);
+                log.append("File: " + file.getAbsolutePath() + "." + NEWLINE);
                 arguments[0] = file.getAbsolutePath();
                 if (!arguments[0].isEmpty() && !arguments[1].isEmpty()) {
-                	log.append(sv.processArguments(arguments));
+                    log.append(sv.processArguments(arguments));
                 }
             } else {
-                log.append("Open command cancelled by user." + newline);
+                log.append("Open command cancelled by user." + NEWLINE);
             }
             log.setCaretPosition(log.getDocument().getLength());
  
@@ -100,13 +102,13 @@ public class SchemaValidatorGUI extends JPanel
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File file = folderChooser.getSelectedFile();
                 //This is where a real application would save the file.
-                log.append("Folder: " + file.getAbsolutePath() + "." + newline);
+                log.append("Folder: " + file.getAbsolutePath() + "." + NEWLINE);
                 arguments[1] = file.getAbsolutePath();
                 if (!arguments[0].isEmpty() && !arguments[1].isEmpty()) {
-                	log.append(sv.processArguments(arguments));
+                    log.append(sv.processArguments(arguments));
                 }
             } else {
-                log.append("Save command cancelled by user." + newline);
+                log.append("Save command cancelled by user." + NEWLINE);
             }
             log.setCaretPosition(log.getDocument().getLength());
         }
